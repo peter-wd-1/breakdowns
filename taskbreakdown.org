@@ -42,7 +42,7 @@ Should user have RFI attribute?
 
 
 
-* ~MildStone: 4~6~ Microservice infrastructures [0%]
+* ~MildStone: 7~ Microservice infrastructures [0%]
 I'll demonstrate test app once the infrastructures is ready
 ** [ ] Microservice Architecture Production [0%]
 *** [ ] ~0.2~ Web Server / Application Server
@@ -64,8 +64,9 @@ I'll demonstrate test app once the infrastructures is ready
 - Docker
 *** [ ] ~1~ Logging/Monitoring
 - Elasticsearch/Kibana
-* ~MildStone: 1~2~ Home, customer|vendor [0%]
-** [ ] Backend [0%]
+* ~MildStone: ~2~ Home, customer|vendor [0%]
+Covers managing content on home page.this should include about us, site map, footer , terms or use etc and other content.
+** [ ] Back [0%]
 *** [ ] ~0.2~ Content management service for home [0%]
 CRUD API for home page contents, only by API call this will be used at this stage. We'll have full Admin dashboard UI down the line.
 - data set of key-value pair (content title - content)
@@ -123,9 +124,10 @@ want to store log data?
 - [ ] Meta data input
   - thumbname, details
 
-* ~MildStone: 1~ Authentication, Authorization
-** [ ] Backend [0%]
-*** [ ] ~0.5~ User authentication service
+* ~MildStone: ~2~ Authentication, Authorization
+** [ ] Back [0%]
+*** [ ] ~1~ User authentication service
+Authentication of user. This service also includes authorization for user to use each services baised on their role(customer, vendor)
 User Delete?
 - Authentication service
   - Google Login
@@ -138,7 +140,7 @@ User Delete?
 - User DB
   - Enabled Service
   - Token
-*** [ ] ~0.2~ Email Service
+*** [ ] ~0.5~ Email Service
 - Sending email to user
 - No-reply
 ** [ ] Front [0%]
@@ -150,9 +152,9 @@ Only one question at a time.
 - Password / Error Validation
 - Google Authentication
 
-* ~MildStone: 0.5~ Payment Server [0%]
+* ~MildStone: 1~ Payment Server [0%]
 User can use their card without re-registering their card information
-** [ ] Backend [0%]
+** [ ] Back [0%]
 *** ~0.25~ Payment service
 3rd Party Integration
 Stripe Checkout, paypal integration, make user session get result via webhook
@@ -162,16 +164,27 @@ Stripe Checkout, paypal integration, make user session get result via webhook
 From where witch button leads to payament?
 *** ~0.25~ Payment Page [0%]
 
-* ~MildStone: 3~4~ Instant RFI Box, Template Search [0%]
-** [ ] Backend [0%]
-*** [ ] ~0.5~ RFI Serive
+* ~MildStone: ~7~ Instant RFI Box, Template Search [0%]
+
+Customer enters minimum template parameters
+- Project Type
+- Main Technology
+- Project Size
+- Budget for the Project
+- Certifications
+- Vendor - Years of Experience
+- Project Description : Para with 200 words
+- Template document describing the Project Requirement
+- Project Tags
+** [ ] Back [0%]
+*** [ ] ~1~ RFI Serive
 RFI DB provider
 All the RFI Data will be stored and managed here.
 - RFI Data storage =CRUD= API,
   - need JSON data format data to input DB
   - need to check the spread sheet of the actual data.
     - I might need extra work for converting dataset to JSON
-*** [ ] ~1.5~ Template Search engine Service
+*** [ ] ~2~ Template Search engine Service
 - Text Search request for user input
   - Response per user input
     - Search from Indexed Template DB for Elastic Search
@@ -193,24 +206,37 @@ This will completed RFI build process with minimum mount of parameters
   Send RFI =POST= RFI
 - ~improvement~ Project Type UI : images or visualizable presets
   i.e. user can swipe to next to see key features of MVP site with image.
-*** [ ] ~0.2~ Template Search Bar
-*** [ ] ~0.3~ Template Result List
-This shows search results
+*** [ ] ~0.5~ Template Search Bar
+*** [ ] ~0.5~ Template Result List
+This sho  ws search results
 - [ ] RFI List View
 - [ ] Send RFI =POST= RFI
-*** [ ] ~0.5~ Template Details Page
+*** [ ] ~1~ Template Details Page
 - [ ] Accordion View
 - [ ] Document File upload
-* ~MildStone: 7~8~ RFI Builder
+* ~MildStone: ~8~ RFI Builder
 ~improvement~ There should be a significant improvement in perspective of UI/UX for this, Therefore I included time for designing the UI/UX
-** [ ] Backend [0%]
+
+Requirement
+---------
+Two main sections
+A> Project Requirements : same as information from Instant RFI form
+B> Vendor Selection Criteria RFI sections with default values
+
+Vendor Selection Criteria Summary Sheet will be displayed containing Set of questions and default preferences
+
+Customer to be able to set and change priority for the major components ie pricing, team components etc.
+
+Customer clicks on the "Show RFI Response" button
+
+** [ ] Back [0%]
 *** [ ] ~1~ Builder Auto Input Service
 Business rule for auto input rest of parameters.
 Pre-defined Excel sheet rules will be applied
 *** [ ] ~2~ Custom Questions ( Real-time Chat ) Service
 *Chat server will open chat per companies that answered custome questions*
 this chat will be change matching score.
-** [ ] Front [%]
+** [ ] Front [0%]
 *** [ ] ~1~ RFI builder
 **** User action
 - [ ] Send RFI
@@ -220,24 +246,37 @@ this chat will be change matching score.
 - [ ] Change parameters
 *** [ ] ~2~ Custom Questions ( Real-time Chat ) UI
 User will see chat list with corresponding companies that answerd thier custome quetion.
-
-* ~MildStone: 8~9~ Vendor OnBoarding/Dashboard
-** [ ] Backend [0%]
+Custom questions will be part of the RFI builder and result screen (not separate functionality)
+* ~MildStone: ~9~ Vendor OnBoarding/Dashboard
+** [ ] Back [0%]
 *** [ ] ~1~ Vendor Service
 vendor DB provider.
 statick data provider
 *** [ ] ~3~ Vendor dashboard
+*** [ ] ~1~ RFI Service Update
+RFI status change service
+RFI has status
 ** [ ] Front [0%]
 *** [ ] ~1~ Vendor On-boarding UI Form
 - document uploader
 *** [ ] ~3~ Vendor dashboard
-* ~MildStone:~
-* ~MildStone:~
-* ~MildStone:~ Results Screen [0%]
+* ~MildStone:~ ~10~ Results Screen [0%]
+** Back
+*** Evaluating Service
+take all the parameters and process to create output matching score
+*** ML Matching algorism Serivce
+** Front
+*** drag and drop Ui
+*** Realtime parameter listener
+*** Prioritized list
+*** Matching Score Graph
+*** Analytics
 ** Contact RFITeam button and Form for clients
-** User(Customer) Page
-*** Template List Status
-* ~MildStone:~ Registration/Email Verification
-* ~MildStone:~ Vendor Details Page
-* ~MildStone:~ Recommendation Engine
-* ~MildStone:~ Registration/Email Verification
+** Recommendation Engine [0%]
+* ~MildStone:~ ~3~ Vendor Details Page
+* ~MildStone:~ ~3~ Admin Page
+** Back
+*** Editing Vendor Racking
+** Front
+*** End
+* ~MildStone: 2~ Basic Reports
