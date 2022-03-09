@@ -1,68 +1,68 @@
 
 # Table of Contents
 
-1.  [System Estimation](#org9cc6a48)
-2.  [Infrastructure](#org22c10ea)
-    1.  [Centralized Event message](#orgf226a73)
-        1.  [Message Server, Event Queue](#org05e2c85)
-    2.  [Database](#org8d9216c)
-        1.  [{ Cloud Atlas | EC2 & Docker }](#org4e4bd5e)
-        2.  [MongoDB](#orgeeccd81)
-    3.  [Deploy Container](#orgdb16d39)
-        1.  [Docker swarm](#org9f6f5e0)
-        2.  [{ EC2 | Digital Ocean | ECS }](#orgd207d2b)
-    4.  [CI/CD](#org526d141)
-        1.  [Shell script](#org3cc32d9)
-        2.  [Git lab(git action)](#org6402019)
-        3.  [AWS codedeploy / codepipeline](#org49d706a)
-    5.  [High availability](#org77844fe)
-        1.  [ECS & ECR](#orge643a56)
-        2.  [Health Check](#orgc0036ed)
-        3.  [alert & monitoring](#org1b8aad1)
-    6.  [Latency handling](#org858e890)
-        1.  [Kafka](#org3b50c73)
-    7.  [Auto Scaling](#orgcaa6613)
-    8.  [CDN](#orgad2c56a)
-    9.  [Scalability](#orgc67f650)
-        1.  [Docker swarm + Nginx Load balancer](#orga181233)
-3.  [Backend Stack](#orga137dc0)
-    1.  [Development](#org9678b38)
-    2.  [Nodejs](#orgfe7c7b6)
-        1.  [web framework](#org1fbd2f7)
-        2.  [testing](#org7e5f937)
-        3.  [API doc](#org377c95f)
-        4.  [Data Validation/Schemas/serialize](#orgdfd244e)
-        5.  [Additional modules depending on each services](#orgd95c1c1)
-    3.  [Web server](#org50e6160)
-        1.  [Nginx](#orgf913c45)
-    4.  [SendGrid Email Support](#org0d12e54)
-    5.  [Twilio SMS,MMS Support](#org27c981c)
-4.  [Backend Application](#orgc8c4125)
-    1.  [Infra Services](#org76ed516)
-        1.  [Message Services : manage message queue](#org75abbdb)
-        2.  [Authentication/Authorization Services](#orge8c3281)
-    2.  [Business Services](#org1fd3665)
-        1.  [RFI Service](#org28e850e)
-        2.  [Template/RFI Search Service](#org9182196)
-        3.  [Vendor Manage Service](#org1e65ba5)
-        4.  [Matching Service](#orgdb4eeb2)
-        5.  [Static Content Manage Service](#org182e193)
-        6.  [Alert/notification Service](#org9607080)
-        7.  [Vendor/Customer Chat Service](#org5c23e9c)
-        8.  [Payment/billing Service](#orgb158b66)
-    3.  [Entities](#org1c7ba19)
-        1.  [customer](#org01550cc)
-        2.  [vendor](#org951f18e)
-        3.  [admin](#orgf050c2e)
-        4.  [RFI](#org56c647e)
-        5.  [project<sub>template</sub>](#org32e5b0c)
-        6.  [notifications](#org24713ef)
-        7.  [static<sub>content</sub>](#org659fb3d)
-    4.  [DB Schema](#orgc0eda44)
+1.  [System Estimation](#orgd0d7d77)
+2.  [Infrastructure](#orgda28efe)
+    1.  [Centralized Event message](#org30196a0)
+        1.  [Message Server, Event Queue](#org9d415d1)
+    2.  [Database](#org1514f2d)
+        1.  [{ Cloud Atlas | EC2 & Docker }](#org3db9f89)
+        2.  [MongoDB](#orga23d733)
+    3.  [Deploy Container](#orgf3a9167)
+        1.  [Docker swarm](#orga736356)
+        2.  [{ EC2 | Digital Ocean | ECS }](#org86f3264)
+    4.  [CI/CD](#org6a442eb)
+        1.  [Shell script](#org7a87c48)
+        2.  [Git lab(git action)](#orgf41c8d2)
+        3.  [AWS codedeploy / codepipeline](#orgc32f7e2)
+    5.  [High availability](#org100b6cb)
+        1.  [ECS & ECR](#org16904ab)
+        2.  [Health Check](#orgc69d6ce)
+        3.  [alert & monitoring](#orgc0e3880)
+    6.  [Latency handling](#orgc724893)
+        1.  [Kafka](#org5e05e66)
+    7.  [Auto Scaling](#org4a8c184)
+    8.  [CDN](#org81fa771)
+    9.  [Scalability](#org6e43a93)
+        1.  [Docker swarm + Nginx Load balancer](#orga3dec87)
+3.  [Backend Stack](#orgec8f952)
+    1.  [Development](#org2bac490)
+    2.  [Nodejs](#org9a19d4c)
+        1.  [web framework](#orgbb9174d)
+        2.  [testing](#org6902a44)
+        3.  [API doc](#org8632881)
+        4.  [Data Validation/Schemas/serialize](#org7f2c926)
+        5.  [Additional modules depending on each services](#org8dde3f3)
+    3.  [Web server](#org915eb22)
+        1.  [Nginx](#org72c2a38)
+    4.  [SendGrid Email Support](#orgbe255e3)
+    5.  [Twilio SMS,MMS Support](#orgcf204ba)
+4.  [Backend Application](#org7db5894)
+    1.  [Infra Services](#org2ea0669)
+        1.  [Message Services : manage message queue](#org1419e44)
+        2.  [Authentication/Authorization Services](#orgab2ec71)
+    2.  [Business Services](#orgd8647e0)
+        1.  [RFI Service](#orgb06a404)
+        2.  [Template/RFI Search Service](#org58493c5)
+        3.  [Vendor Manage Service](#org6b35548)
+        4.  [Matching Service](#orge6e7d2c)
+        5.  [Static Content Manage Service](#org3002be6)
+        6.  [Alert/notification Service](#org140a3d1)
+        7.  [Vendor/Customer Chat Service](#org1e8380a)
+        8.  [Payment/billing Service](#orge9c4c81)
+    3.  [Entities](#org7ec5ee9)
+        1.  [customer](#org591faed)
+        2.  [vendor](#org80ffa51)
+        3.  [admin](#orgd35a17e)
+        4.  [RFI](#orge3d0de4)
+        5.  [project<sub>template</sub>](#orgefff319)
+        6.  [notifications](#org11186e0)
+        7.  [static<sub>content</sub>](#org06069e9)
+    4.  [DB Schema](#orgca5c7a5)
 
 
 
-<a id="org9cc6a48"></a>
+<a id="orgd0d7d77"></a>
 
 # System Estimation
 
@@ -80,7 +80,7 @@ We can assume some of metrics like
 -   size of on boarding vendor data
 -   size of changes of RFI
 
-From the given metric, we can drive read/write throughput, bandwidth.
+From the given metric, we can derive the metrics such as read/write throughput, bandwidth.
 
 However, our priority is having showcase page and we are designing MVP, I decided to proceed without spending much time on estimating system specs.
 Rather, I would focus on designing more flexible system for horizontal scaling.
@@ -90,17 +90,17 @@ Rather, I would focus on designing more flexible system for horizontal scaling.
 I think I can achieve this by using follow up high level design.
 
 
-<a id="org22c10ea"></a>
+<a id="orgda28efe"></a>
 
 # Infrastructure
 
 
-<a id="orgf226a73"></a>
+<a id="org30196a0"></a>
 
 ## Centralized Event message
 
 
-<a id="org05e2c85"></a>
+<a id="org9d415d1"></a>
 
 ### Message Server, Event Queue
 
@@ -110,17 +110,17 @@ I think I can achieve this by using follow up high level design.
 -   Event will be stored and handled and will be eventually deleted as time decay
 
 
-<a id="org8d9216c"></a>
+<a id="org1514f2d"></a>
 
 ## Database
 
 
-<a id="org4e4bd5e"></a>
+<a id="org3db9f89"></a>
 
 ### { Cloud Atlas | EC2 & Docker }
 
 
-<a id="orgeeccd81"></a>
+<a id="orga23d733"></a>
 
 ### MongoDB
 
@@ -129,12 +129,12 @@ I think I can achieve this by using follow up high level design.
     **this can be used for searching the closest vendor**
 
 
-<a id="orgdb16d39"></a>
+<a id="orgf3a9167"></a>
 
 ## Deploy Container
 
 
-<a id="org9f6f5e0"></a>
+<a id="orga736356"></a>
 
 ### Docker swarm
 
@@ -144,53 +144,53 @@ I think I can achieve this by using follow up high level design.
 -   rolling updates : staging
 
 
-<a id="orgd207d2b"></a>
+<a id="org86f3264"></a>
 
 ### { EC2 | Digital Ocean | ECS }
 
 
-<a id="org526d141"></a>
+<a id="org6a442eb"></a>
 
 ## CI/CD
 
 
-<a id="org3cc32d9"></a>
+<a id="org7a87c48"></a>
 
 ### Shell script
 
 -   for more customized way for deployment and server setting
 
 
-<a id="org6402019"></a>
+<a id="orgf41c8d2"></a>
 
 ### Git lab(git action)
 
 -   deploy automation with AWS codedeploy
 
 
-<a id="org49d706a"></a>
+<a id="orgc32f7e2"></a>
 
 ### AWS codedeploy / codepipeline
 
 
-<a id="org77844fe"></a>
+<a id="org100b6cb"></a>
 
 ## High availability
 
 
-<a id="orge643a56"></a>
+<a id="org16904ab"></a>
 
 ### ECS & ECR
 
 
-<a id="orgc0036ed"></a>
+<a id="orgc69d6ce"></a>
 
 ### Health Check
 
 -   docker swarm has health check functionality
 
 
-<a id="org1b8aad1"></a>
+<a id="orgc0e3880"></a>
 
 ### alert & monitoring
 
@@ -199,12 +199,12 @@ I think I can achieve this by using follow up high level design.
 -   cloudwatch
 
 
-<a id="org858e890"></a>
+<a id="orgc724893"></a>
 
 ## Latency handling
 
 
-<a id="org3b50c73"></a>
+<a id="org5e05e66"></a>
 
 ### Kafka
 
@@ -212,38 +212,38 @@ I think I can achieve this by using follow up high level design.
 -   message consumer & producer between service
 
 
-<a id="orgcaa6613"></a>
+<a id="org4a8c184"></a>
 
 ## Auto Scaling
 
 
-<a id="orgad2c56a"></a>
+<a id="org81fa771"></a>
 
 ## CDN
 
 -   { cloudflare | cloudfront }
 
 
-<a id="orgc67f650"></a>
+<a id="org6e43a93"></a>
 
 ## Scalability
 
 Each services can be horizontally scaled
 
 
-<a id="orga181233"></a>
+<a id="orga3dec87"></a>
 
 ### Docker swarm + Nginx Load balancer
 
 nodejs cluster module can only distribute traffic on a single machine. But by using load balancer we can achieve horizontal scaling.
 
 
-<a id="orga137dc0"></a>
+<a id="orgec8f952"></a>
 
 # Backend Stack
 
 
-<a id="org9678b38"></a>
+<a id="org2bac490"></a>
 
 ## Development
 
@@ -255,12 +255,12 @@ I have my own simple boilerplate for my work env to work with typescript nodejs 
 -   CI/CD (refer to cloud infrastructure)
 
 
-<a id="orgfe7c7b6"></a>
+<a id="org9a19d4c"></a>
 
 ## Nodejs
 
 
-<a id="org1fbd2f7"></a>
+<a id="orgbb9174d"></a>
 
 ### web framework
 
@@ -273,21 +273,21 @@ if routes are more then 40~50
 -   Fastify
 
 
-<a id="org7e5f937"></a>
+<a id="org6902a44"></a>
 
 ### testing
 
 -   jest
 
 
-<a id="org377c95f"></a>
+<a id="org8632881"></a>
 
 ### API doc
 
 -   swagger
 
 
-<a id="orgdfd244e"></a>
+<a id="org7f2c926"></a>
 
 ### Data Validation/Schemas/serialize
 
@@ -295,17 +295,17 @@ if routes are more then 40~50
 -   mongoose
 
 
-<a id="orgd95c1c1"></a>
+<a id="org8dde3f3"></a>
 
 ### Additional modules depending on each services
 
 
-<a id="org50e6160"></a>
+<a id="org915eb22"></a>
 
 ## Web server
 
 
-<a id="orgf913c45"></a>
+<a id="org72c2a38"></a>
 
 ### Nginx
 
@@ -314,132 +314,132 @@ if routes are more then 40~50
 -   load balancer
 
 
-<a id="org0d12e54"></a>
+<a id="orgbe255e3"></a>
 
 ## SendGrid Email Support
 
 
-<a id="org27c981c"></a>
+<a id="orgcf204ba"></a>
 
 ## Twilio SMS,MMS Support
 
 
-<a id="orgc8c4125"></a>
+<a id="org7db5894"></a>
 
 # Backend Application
 
 
-<a id="org76ed516"></a>
+<a id="org2ea0669"></a>
 
 ## Infra Services
 
 
-<a id="org75abbdb"></a>
+<a id="org1419e44"></a>
 
 ### Message Services : manage message queue
 
 
-<a id="orge8c3281"></a>
+<a id="orgab2ec71"></a>
 
 ### Authentication/Authorization Services
 
 
-<a id="org1fd3665"></a>
+<a id="orgd8647e0"></a>
 
 ## Business Services
 
 
-<a id="org28e850e"></a>
+<a id="orgb06a404"></a>
 
 ### RFI Service
 
--   create<sub>RFI</sub>(RFIData)
--   delete<sub>RFI</sub>(RFIID)
--   update<sub>RFI</sub>(RFIID,RFIData)
--   create<sub>user</sub><sub>RFI</sub>(userID, RFIID, RFIData)
--   delete<sub>user</sub><sub>RFI</sub>(userID, RFIID, RFIData)
--   update<sub>user</sub><sub>RFI</sub>(userID, RFIID, RFIData)
--   create<sub>MVP</sub><sub>template</sub>()
--   delete<sub>MVP</sub><sub>template</sub>()
--   update<sub>MVP</sub><sub>template</sub>()
+-   `create_RFI(RFIData)`
+-   `delete_RFI(RFIID)`
+-   `update_RFI(RFIID,RFIData)`
+-   `create_user_RFI(userID, RFIID, RFIData)`
+-   `delete_user_RFI(userID, RFIID, RFIData)`
+-   `update_user_RFI(userID, RFIID, RFIData)`
+-   `create_MVP_template()`
+-   `delete_MVP_template()`
+-   `updateMVP_template()`
 
 
-<a id="org9182196"></a>
+<a id="org58493c5"></a>
 
 ### Template/RFI Search Service
 
 
-<a id="org1e65ba5"></a>
+<a id="org6b35548"></a>
 
 ### Vendor Manage Service
 
 
-<a id="orgdb4eeb2"></a>
+<a id="orge6e7d2c"></a>
 
 ### Matching Service
 
 
-<a id="org182e193"></a>
+<a id="org3002be6"></a>
 
 ### Static Content Manage Service
 
 
-<a id="org9607080"></a>
+<a id="org140a3d1"></a>
 
 ### Alert/notification Service
 
 
-<a id="org5c23e9c"></a>
+<a id="org1e8380a"></a>
 
 ### Vendor/Customer Chat Service
 
 
-<a id="orgb158b66"></a>
+<a id="orge9c4c81"></a>
 
 ### Payment/billing Service
 
 
-<a id="org1c7ba19"></a>
+<a id="org7ec5ee9"></a>
 
 ## Entities
 
 
-<a id="org01550cc"></a>
+<a id="org591faed"></a>
 
 ### customer
 
 
-<a id="org951f18e"></a>
+<a id="org80ffa51"></a>
 
 ### vendor
 
 
-<a id="orgf050c2e"></a>
+<a id="orgd35a17e"></a>
 
 ### admin
 
 
-<a id="org56c647e"></a>
+<a id="orge3d0de4"></a>
 
 ### RFI
 
 
-<a id="org32e5b0c"></a>
+<a id="orgefff319"></a>
 
 ### project<sub>template</sub>
 
 
-<a id="org24713ef"></a>
+<a id="org11186e0"></a>
 
 ### notifications
 
 
-<a id="org659fb3d"></a>
+<a id="org06069e9"></a>
 
 ### static<sub>content</sub>
 
 
-<a id="orgc0eda44"></a>
+<a id="orgca5c7a5"></a>
 
 ## DB Schema
 
