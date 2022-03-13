@@ -1,0 +1,66 @@
+#+TITLE: Event Driven Microservice(EDM)
+
+* Event Driven MicroService Architecture(EDM)
+*This is only for a reference of EDM and not our actual design.*
+** Event Driven
+*** Event
+- change of state
+- CUD of Data
+  - creation of data
+  - edition of data
+  - deletion of data
+*** Asynchronous Communication
+- Kafka will do the work for this.
+- pub/sub
+- make sure it has 2 instance work for scaling
+*** Event Log
+- stack of events creates current data
+- store all event log
+- rollback prior to failure of event
+  - Saga Pattern
+    - if one event fail, rollback to previous state of data
+*** integration
+Ideally, services should not have to talk with each other
+But it's almost impossible.
+** Database Oriented
+*** Database schema design first
+*** Data CRUD, flow, life cycle
+You can only access data via owner service API
+If other can access the database it will be a NP problem that needs to prove if you can make a change on database
+** Distributed Transaction
+*** Need to handle data rollback/retry process when transaction failed
+** Flow
+*** End-to-end 500ms
+*** Database record created -> published to Kafka -> consumed on the other side
+*** Event Producers
+1) stores every insert, update, delete along with the operation (complete history)
+   If a user table(collection) record(document) has updated, the record is called 'current record' and has *event log* that stores the operation has been done.
+2) and then, when it inserts the *event log* to event log table for user table, also should queue the *event log* to be published as an event that notifies if the 1) is successful of not
+3) re-queue the update *event log* if user event fail
+**** Simply, CUD of user data > create an event log of the operation > Stores event log to event log document > Publish the event log
+**** Real time, async, publishes 1 event per event log record
+**** Enable replay by simply re-queuing event log record
+
+*** Event Consumers
+1) Read off of Kafka get a batch of the user record(document)
+2) Stores the batch local storage, because Kafka will remove the batch as time goes on or we can delete the batch sooner by doing this.
+   Also, if something happened it doesn't need to go to Kafka.
+   Plus, on testing, it make possible to process end-to-end test from producer to consumer
+3) Process incoming events(every 250ms, need to check Kafka consumer setup)
+
+*** Event Schema
+- =user_updated=, =user_inserted=
+  - event_id : uuid
+  - timestamp : Unix-timestamp
+  - user : user (actual user model,record)
+- =user_deleted=
+  - event_id : uuid
+  - timestamp : Unix-timestamp
+  - user : user (actual user model,record) or userID
+
+*** Event Log Schema
+- Event log
+  - transaction ID
+  - service
+  - event type
+  - payload
