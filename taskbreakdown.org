@@ -1,7 +1,5 @@
-#+TITLE: Taskbreakdown
+#+TITLE: Task breakdown
 
-
-Should user have RFI attribute?
 
 * Scope :
 ** Includes
@@ -21,7 +19,7 @@ Should user have RFI attribute?
 ** Backend
 - Nodejs & Express / Nginx
 - Docker compose
-- mongoDB Atlas
+- mongoDB
 - AWS Elastic Search
 - Redis(no storage, single excitable services) on ECR
 - Kafca on ECR
@@ -44,7 +42,7 @@ Should user have RFI attribute?
 
 * ~MildStone: 7~ Microservice infrastructures [0%]
 I'll demonstrate test app once the infrastructures is ready
-** [ ] Microservice Architecture Production [0%]
+** Microservice Architecture Production [0%]
 *** [ ] ~0.2~ Web Server / Application Server
 - Nodejs & Express / Nginx
 *** [ ] ~0.5~ Dadabase Server
@@ -58,12 +56,13 @@ I'll demonstrate test app once the infrastructures is ready
 - Static file server
 *** [ ] ~1~ CI/CD
 - Jenkins
-- Githib
+- Gitlab
 - AWS ECR
 - AWS Elastic beanstalk
-- Docker
+- Docker compose
 *** [ ] ~1~ Logging/Monitoring
 - Elasticsearch/Kibana
+- slack connection
 * ~MildStone: ~2~ Home, customer|vendor [0%]
 Covers managing content on home page.this should include about us, site map, footer , terms or use etc and other content.
 ** [ ] Back [0%]
@@ -277,6 +276,9 @@ take all the parameters and process to create output matching score
 * ~MildStone:~ ~3~ Admin Page
 ** Back
 *** Editing Vendor Racking
+bulk upload of vendor data along with recommendation and ratings from RFI ready team
 ** Front
 *** End
 * ~MildStone: 2~ Basic Reports
+"Subscription related report
+Analytics report"
