@@ -1,0 +1,167 @@
+#+TITLE: System Spec
+
+* System Estimation
+We can assume some of metrics like
+
+- User
+  - vendor : 25000
+- DAU
+  - vendor
+  - customer
+- # of requests of complete RFI submission per user
+- # of requests of complete RFI submission per day
+- # of messages between customers and vendors
+- # of vendor registrations per day
+- # of changes per RFI
+- size of RFI request per request
+- size of on boarding vendor data
+- size of changes of RFI
+
+From the given metric, we can derive estimation metrics such as read/write throughput, bandwidth.
+
+However, I decided to proceed without spending much time on estimating system capacity since our priority is having showcase page and we are designing MVP.
+Rather, I would focus on designing more flexible system for horizontal scaling.
+
+(If you think that considering large mount of read/write throughput per user, I would reconsider spending more time on estimating)
+
+I think I can achieve this by using follow up high level design.
+
+* Infrastructure
+** Docker Swarm on EC2
+*** Docker Swarm
+- Docker Compose is not designed for production environment
+  - No fail over response
+  - No rolling update
+    - Need to write solution for staging : Zero down time update
+- Docker Swarm have out-of-box solution For
+  - Health Check
+  - Zero downtime update & rolling
+  - LB for Container
+*** How many EC2 instance?
+- We're going to use minimum number of EC2 host for our development.
+- It's okay to use multiple container on the same host
+
+** CDN
+We will need this if we want to publish out API to public
+- { cloudflare | cloudfront }
+- Enhance Security
+  - DDOS protection
+
+** API proxy
+*** Deploy
+- EC2
+- Docker Swarm
+*** Route Request from Client
+** Centralized Event message
+*** EC2
+*** Message Server, Event Queue
+- Services can send(producer) request to event queue and polling(comsumer, in case of Kafka) event from there.
+- Kafka event message broker for conveying messages between services.
+** Database
+*** Deploy : EC2 & Docker Swarm
+*** MongoDB
+- Shading, if needed
+- Geospacial queries
+  - *this can be used for searching the closest vendor*
+** Deployment of Containers
+*** Docker swarm
+- auto-recovery of services
+- rollbacks
+- health checks is available
+- rolling updates : zero downtime
+*** { EC2 | Digital Ocean | ECS }
+** CI/CD
+*** Git lab(git action)
+- automate deployment with AWS codedeploy
+*** AWS codedeploy / codepipeline
+*** Shell script
+- for more customized way for deployment and server setting
+** High availability
+*** ECS & ECR
+*** Health Check
+- docker swarm has health check functionality
+*** alert & monitoring
+- slack for urgent alert.
+- grafana & telegraf & influxDB for system details monitoring
+- AWS cloudwatch
+** Auto Scaling
+** Scalability
+Each services can be horizontally scaled
+*** Docker swarm + Nginx Load balancer
+nodejs cluster module can only distribute traffic on a single machine. But by using load balancer we can achieve horizontal scaling.
+** Frontend deploy
+*** Vercel
+
+* Backend Stack
+** Development
+I have my own simple boilerplate for my work env to work with typescript nodejs project.
+- doom emacs
+- typescript
+- nodejs
+- CI/CD (refer to cloud infrastructure)
+** Nodejs
+*** web framework
+if routes are less then 40
+- express
+if routes are more then 40~50
+- Fastify
+*** testing
+- jest
+*** API doc
+- swagger
+*** Data Validation/Schemas/serialize
+- Avsc | Joi
+- mongoose
+*** Additional modules depending on each services
+** Web server
+*** Nginx
+- cache response
+- reverse proxy
+- load balancer
+** SendGrid Email Support
+** Twilio SMS,MMS Support
+
+* Backend Application
+** Infra Services
+*** Message Services : manage message queue
+store and delete events. all messages will be sent to cloudwatch with some interval.
+*** Authentication/Authorization Services
+*** API proxy
+route a request to right service. route should alwalys be lowercase.
+** Business Services
+*** RFI
+response | query seperatrly
+- =create_RFI(RFIData)=
+- =delete_RFI(RFIID)=
+- =update_RFI(RFIID,RFIData)=
+- =create_user_RFI(userID, RFIID, RFIData)=
+- =delete_user_RFI(userID, RFIID)=
+- =update_user_RFI(userID, RFIID, RFIData)=
+- =create_project_template(vendorID, projectData)=
+- =delete_project_template(vendorID, projectID)=
+- =update_project_template(vendorID, projectID, projectData)=
+*** Template/RFI Search Service
+*** Vendor Manage Service
+*** Vendor Matching Service
+*** Static Content Manage Service
+*** Alert/notification Service
+*** Vendor/Customer Chat Service
+SMS, Email, web push
+*** Payment/billing Service
+** Data
+every data should be stored and never be removed
+** Entities
+description of entities and its attridu
+*** Role
+we should able to tag for each user to group them for each plan
+**** Customer
+queries
+**** Vendor
+response
+**** Admin
+*** RFI
+*** project template
+*** notifications
+*** static content
+
+** DB Schema
