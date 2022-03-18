@@ -1,4 +1,4 @@
-#+TITLE: System Spec
+#+TITLE: System specification
 
 * System Estimation
 We can assume some of metrics like
@@ -121,47 +121,3 @@ if routes are more then 40~50
 ** SendGrid Email Support
 ** Twilio SMS,MMS Support
 
-* Backend Application
-** Infra Services
-*** Message Services : manage message queue
-store and delete events. all messages will be sent to cloudwatch with some interval.
-*** Authentication/Authorization Services
-*** API proxy
-route a request to right service. route should alwalys be lowercase.
-** Business Services
-*** RFI
-response | query seperatrly
-- =create_RFI(RFIData)=
-- =delete_RFI(RFIID)=
-- =update_RFI(RFIID,RFIData)=
-- =create_user_RFI(userID, RFIID, RFIData)=
-- =delete_user_RFI(userID, RFIID)=
-- =update_user_RFI(userID, RFIID, RFIData)=
-- =create_project_template(vendorID, projectData)=
-- =delete_project_template(vendorID, projectID)=
-- =update_project_template(vendorID, projectID, projectData)=
-*** Template/RFI Search Service
-*** Vendor Manage Service
-*** Vendor Matching Service
-*** Static Content Manage Service
-*** Alert/notification Service
-*** Vendor/Customer Chat Service
-SMS, Email, web push
-*** Payment/billing Service
-** Data
-every data should be stored and never be removed
-** Entities
-description of entities and its attridu
-*** Role
-we should able to tag for each user to group them for each plan
-**** Customer
-queries
-**** Vendor
-response
-**** Admin
-*** RFI
-*** project template
-*** notifications
-*** static content
-
-** DB Schema
