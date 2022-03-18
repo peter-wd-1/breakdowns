@@ -1,0 +1,47 @@
+#+TITLE: Service Design
+* Service Design
+** User
+*** API
+- POST /users
+- POST /users/login
+- GET /users/<userid>
+- POST /users/email/verification-codes
+- GET /users/email/verification-codes/<code>
+
+** Business Services
+*** RFI
+response | query seperatrly
+- =create_RFI(RFIData)=
+- =delete_RFI(RFIID)=
+- =update_RFI(RFIID,RFIData)=
+- =create_user_RFI(userID, RFIID, RFIData)=
+- =delete_user_RFI(userID, RFIID)=
+- =update_user_RFI(userID, RFIID, RFIData)=
+- =create_project_template(vendorID, projectData)=
+- =delete_project_template(vendorID, projectID)=
+- =update_project_template(vendorID, projectID, projectData)=
+*** Template/RFI Search Service
+*** Vendor Manage Service
+*** Vendor Matching Service
+*** Static Content Manage Service
+*** Alert/notification Service
+*** Vendor/Customer Chat Service
+SMS, Email, web push
+*** Payment/billing Service
+** Data
+every data should be stored and never be removed
+** Entities
+description of entities and its attridu
+*** Role
+we should able to tag for each user to group them for each plan
+**** Customer
+queries
+**** Vendor
+response
+**** Admin
+*** RFI
+*** project template
+*** notifications
+*** static content
+
+** DB Schema
