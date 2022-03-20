@@ -6,20 +6,6 @@
   if so, we should go with link document rather then imbed.
   But if we use event driven microservice(EDM), We can publish chages to handle inconsistency for denomarlized data.
   Is there any data that should be changed with corresponding state or context?
-- =name= : string
-  - string length(6 - 30 char)
-- =email= : string
-  - ~ 50 characters
-  - email form
-- =phone= : string
-  - E.164 from
-  - ~15 digits
-- =company name= : string
-  - ~ 50 characters
-- =website= : string
-  - ~ 50 characters
-- =linkedin= : string
-  - linkedin id
 - =project type= : string
   - one of { project types }
   - if future changes of { project types } won't be needed to be aline with it, we can just use imbed document, since this will cause inconsistency of data(will not reflet future changes).
