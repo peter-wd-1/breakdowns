@@ -49,14 +49,11 @@ If other can access the database it will be a NP problem that needs to prove if 
 3) Process incoming events(every 250ms, need to check Kafka consumer setup)
 
 *** Event Schema
-- =user_updated=, =user_inserted=
-  - event_id : uuid
-  - timestamp : Unix-timestamp
-  - user : user (actual user model,record)
-- =user_deleted=
-  - event_id : uuid
-  - timestamp : Unix-timestamp
-  - user : user (actual user model,record) or userID
+ - aggregate_id : uuid
+ - aggregate_type : string
+ - event_id : uuid
+ - timestamp : Unix-timestamp
+ - payload : object | string
 
 *** Event Log Schema
 - Event log
@@ -64,3 +61,8 @@ If other can access the database it will be a NP problem that needs to prove if 
   - service
   - event type
   - payload
+
+* Database Patterns
+- singe large database
+  - tight coupling between multiple service and single database
+  -

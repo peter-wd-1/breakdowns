@@ -12,11 +12,7 @@
 - =project sub type= : string
   - one of { project types }
 - =project start date= : string
-  - Less than a Month
-  - One to two months
-  - Less than 3 months
-  - Don't know
-  - Immediately (Project is approved)
+  - one of { start data }
 - =main technology= : string
   - one of { technology }
 - =secondary technology= : string
@@ -100,6 +96,12 @@
   - Node JS
   - Angualar
   - JAVA
+- =peroject time=
+  - Less than a Month
+  - One to two months
+  - Less than 3 months
+  - Don't know
+  - Immediately (Project is approved)
 ** Vender
 - sr no
 - category
