@@ -1,0 +1,73 @@
+#+TITLE: Milestone Instrastructures Tasks
+
+* Glossary
+- host : EC2 instance
+- node : an instance of the Docker engine participating in the swarm
+- task : docker container
+- system resources : infrastructure components that listed as the most high level bullet point of "1. Infrastructures"
+- client side : Front End App
+* 1. Infrastructures
+** Route52
+*** [X] Domain Connect
+- create DNS management Hosted zoen
+  - name server setup from Godaddy
+  - add EC2 instance IP
+*** [X] SSL and port forward
+**** [X] Nginx install
+**** [X] SSL
+- certbot install for nginx and run
+  - apply port 443 with certificate for https
+- 80 port forward to 3000 react app
+**** [X] Auto Renew
+- service add for renew cron job
+
+** Docker swarm integration
+- it should be able to orchestrate setup manager node and worker node by script
+  - so that github can use it for CICD and reduce maintenance cost
+**** docker swarm script
+- it should perform rolling update(zero down time)
+  - so that git action performs this script without manually executing it
+- it should scale up or send alert developer whenever system usage reach 70%
+  - so that developer can increase container with scale command of swarm
+- it should restart service whenever it's down for some reason
+- it should check and report health check
+
+** Shared Docker compose
+- it should define shared frontend app container
+- it should define shared service container
+- it should define shared primary DB container
+- it should define shared secondary DB container
+- it should define api proxy container
+- it should define kafka cluster container
+
+** HAProxy
+- it should distribute user traffic from client to systems hosts
+  - so that when one node down other nodes can handle the traffic. logically, all hosts is in one ingrass network in case we're using docker swarm
+
+** API proxy
+- it should forward a HTTP request from *client side* to the service container
+
+** Service
+- it should communicate with designated DB container
+- it should be called only from API proxy
+  
+** Event Broker
+- it should be accessable only from service container
+- it should be able to handle maxim message size
+
+** Monitoring(grafana) & logging(influxDB)
+- it should report system usage of its designated *system resources*
+- it should report when system usage exceeds threshold of pre-defined system factors
+  - so that developer can response system failure in advance. e.g. CPU usage exceeds 90%
+- it should report all logs of entire system resources
+
+** EC2
+- it should run 2 instances
+  - so that docker swarm can distribute resource for staging
+- it should let only one incetence open for public and be accessable each other in same vpn 
+
+* CICD
+** Github action
+- it should use docker swarm integration script to build
+    - it should use docker swarm integration script to push to registry
+    - it should use docker swarm integration script to do rolling update
